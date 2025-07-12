@@ -10,3 +10,5 @@ $\sigma_{kp}=\dfrac{F_{kp}}{A}=\dfrac{\pi^2EJ_{min}}{A(\mu l)^2}=\dfrac{\pi^2E}{
 $i_{min}=\sqrt{ \dfrac{J_{min}}{A} }$
 
 $\lambda=\dfrac{\mu l}{i_{min}}$
+
+$$ calculus = morern + \beta сщсщ $$
