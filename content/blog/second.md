@@ -11,4 +11,6 @@ $i_{min}=\sqrt{ \dfrac{J_{min}}{A} }$
 
 $\lambda=\dfrac{\mu l}{i_{min}}$
 
-$$ calculus = morern + \beta сщсщ $$
+Смурфетта
+
+$$calculus = morern + \beta сщсщ$$
