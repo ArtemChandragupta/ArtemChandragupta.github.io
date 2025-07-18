@@ -1,5 +1,5 @@
 +++
-title = "artem::scriptorium⟶contact"
+title = "artem::contact"
 +++
 
 ## Sites :

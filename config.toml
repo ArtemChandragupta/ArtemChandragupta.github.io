@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://scientiac.space"
+base_url = "https://artemchandragupta.github.io"
 
 #Title
 title = "artem::scriptorium"
@@ -35,10 +35,10 @@ include_content = true
 highlight_code = true
 highlight_theme = "gruvbox-dark"
 
-[extra]
-author = "artemchandragupta"
-email = "iac@scientiac.space"
-profile = "/res/thumbnail.png"
+# [extra]
+# author = "artemchandragupta"
+# email = "iac@scientiac.space"
+# profile = "/res/thumbnail.png"
 
 bio = "A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does."
 
