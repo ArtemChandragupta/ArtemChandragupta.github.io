@@ -38,7 +38,7 @@ highlight_theme = "gruvbox-dark"
 [extra]
 author = "artemchandragupta"
 email = "artem020503@gmain.com"
-profile = "/res/thumbnail.png"
+profile = "/logo/thumbnail.png"
 
 bio = "A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does."
 
