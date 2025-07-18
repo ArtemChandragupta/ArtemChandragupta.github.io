@@ -3,7 +3,7 @@ base_url = "https://artemchandragupta.github.io"
 
 #Title
 title = "artem::scriptorium"
-description = "A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does."
+description = ""
 author = "artemchandragupta"
 
 # Whether to automatically compile all Sass files in the sass directory
@@ -22,7 +22,6 @@ generate_feeds = true
 # make lists according to assigned tags
 taxonomies = [
     {name = "writings", feed = true, paginate_by = 12},
-    {name = "syndicate", feed = true, paginate_by = 12},
 ]
 
 [search]
@@ -39,7 +38,5 @@ highlight_theme = "gruvbox-dark"
 author = "artemchandragupta"
 email = "artem020503@gmain.com"
 profile = "/logo/thumbnail.png"
-
-bio = "A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does."
 
 github_user = "artemchandragupta"
