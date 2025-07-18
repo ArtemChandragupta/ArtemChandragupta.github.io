@@ -1,0 +1,14 @@
+# On every push this script is executed
+name: Zola on GitHub Pages
+jobs:
+  build:
+    name: Publish site
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout main
+      uses: actions/checkout@v4
+    - name: Build and deploy
+      uses: shalzz/zola-deploy-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
