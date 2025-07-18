@@ -35,7 +35,7 @@ include_content = true
 highlight_code = true
 highlight_theme = "gruvbox-dark"
 
-# [extra]
+[extra]
 # author = "artemchandragupta"
 # email = "iac@scientiac.space"
 # profile = "/res/thumbnail.png"
