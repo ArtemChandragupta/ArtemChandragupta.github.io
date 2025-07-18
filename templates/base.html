@@ -1,31 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
 <head>
   <meta charset="utf-8">
-  <title>Scriptorium</title>
-  <link rel="stylesheet" type="text/css" href="/assets/global.css">
-  <script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    },
-    svg: {
-      fontCache: 'global'
-    }
-  };
-  </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-  </script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/themes.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/readable.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/global.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/logo.css">
+
+    {% if page.taxonomies.writings %}
+    {% for tag in page.taxonomies.writings %}
+      <link rel="stylesheet" type="text/css" href="/assets/css/genre/{{tag}}.css" />
+    {% endfor %}
+    {% endif %}
+
+    {% if page.taxonomies.writings %}
+    {% for tag in page.taxonomies.writings %}
+    <meta property="og:type" content="{{tag}}" />
+    {% endfor %}
+    {% endif %}
+
+    {% if page.taxonomies.syndicate %}
+    {% for tag in page.taxonomies.syndicate %}
+    <meta property="og:type" content="{{tag}}" />
+    {% endfor %}
+    {% endif %}
+
+    <meta property="og:site_name" content="scientiac.space" />
+    <meta property="og:image" content="https://scientiac.space/res/thumbnail-light.png" />
+    {% if page.title %}
+    <title>{{ page.title }}</title>
+    <meta name="og:title" content="{{ page.title }}" />
+    {% elif section.title %}
+    <title>{{ section.title }}</title>
+    <meta name="og:title" content="{{ section.title }}" />
+    {% endif %}
+    {%if section.description %}
+    <meta name="description" content="{{ section.description }}" />
+    <meta name="og:description" content="{{ section.description }}" />
+    {%endif%}
+    {%if page.content %}
+    <meta name="description" content="{{ page.content | striptags }}" />
+    <meta name="og:description" content="{{ page.content | striptags }}" />
+    {%endif%}
+
+    <link rel="shortcut icon" type="image/x-icon" href="/logo/logo-small.svg">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="rgb(253, 246, 227)">
+
+    <!----------------    KaTex    ------------------>
+  	{% if page.extra.katex %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+  	{% endif %}
+    <!----------------   /KaTex    ------------------>
+
+    <!---------------- Copy Button ------------------>
+    <script defer="" src="/assets/js/copy-button.js"></script>
+    <!--------------- /Copy Button ------------------>
+
+    <!----------------IndieWeb Auth------------------>
+    <link rel="me" href="https://github.com/scientiac" />
+    <link rel="me" href="mailto:spandan@scientiac.space" />
+    <!----------------/IndieWeb Auth------------------>
+
+    <!----------------  Mastodon  ------------------>
+    <meta name="fediverse:creator" content="@scientiac@fosstodon.org">
+    <!---------------- /Mastodon  ------------------>
+
 </head>
 
-<body>
-  <section class="section">
+
+<body onload="updateThemeSelector();">
+
+  <!------------------LOGO------------------->
+  <div class="logo-container">
+    <a href="/">
+      <div class="inner-logo-container"></div>
+    </a>
+  </div>
+
+  <!------------------NAV------------------->
+  <nav data-style="classy">
+    {% block nav %}
+    <span class="main-li"><a href="/">Main</a></span>
+    <span><a href="/blog">Journal</a></span>
+    <span><a href="/writings">Browse by topic</a></span>
+    <span><a href="/more">More</a></span>
+    {% endblock nav %}
+  </nav>
+
+  <!------------------BODY------------------>
+
+  <section class="section-body">
     <div class="container">
       {% block content %} {% endblock %}
     </div>
+    <script src="/assets/js/themeSelector.js" defer></script>
   </section>
-</body>
+
+  <!------------------HIDDEN------------------>
+
+    <div class="hidden">
+      <a rel="me" href="https://fosstodon.org/@scientiac">Mastodon</a>
+    </div>
+
+
+    <div class="hidden h-card">
+        <img class="u-photo icon" alt="{{ config.author }}" src="{{ config.extra.profile }}" />
+        <a class="p-name u-url" href="{{ config.base_url }}" rel="me">{{ config.author }}</a>
+        <p class="p-note">{{ config.description }}</p>
+    </div>
+
+
+  <!----------------FOOTER------------------>
+    <footer>
+      {% block footer %}
+      <p><a href="https://github.com/scientiac/scientiac.github.io" target="_blank">Source Code</a>. All articles are usable under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. </p>
+      {% endblock footer %}
+    </footer>
 
 </html>

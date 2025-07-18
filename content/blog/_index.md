@@ -1,6 +1,8 @@
 +++
-title = "List of posts"
+title = "artem::[journal]"
 sort_by = "date"
 template = "blog.html"
-page_template = "blog-page.html"
+paginate_by = 12
+page_template = "page.html"
+paginate_path = "page"
 +++

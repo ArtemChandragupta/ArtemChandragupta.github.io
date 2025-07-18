@@ -1,20 +1,45 @@
 # The URL the site will be built for
-base_url = "https://artemchandragupta.github.io"
+base_url = "https://scientiac.space"
 
-title = "Scriptorium"
+#Title
+title = "artem::scriptorium"
+description = "A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does."
 author = "artemchandragupta"
 
 # Whether to automatically compile all Sass files in the sass directory
-compile_sass = true
+compile_sass = false
+
+# When set to "true", the generated HTML files are minified.
+minify_html = true
 
 # Whether to build a search index to be used later on by a JavaScript library
-build_search_index = false
+build_search_index = true
+
+# generate rss feed
+feed_filenames = [ "atom.xml" ]
+generate_feeds = true
+
+# make lists according to assigned tags
+taxonomies = [
+    {name = "writings", feed = true, paginate_by = 12},
+    {name = "syndicate", feed = true, paginate_by = 12},
+]
+
+[search]
+include_title = true
+include_description = false
+include_path = false
+include_content = true
 
 [markdown]
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 highlight_code = true
 highlight_theme = "gruvbox-dark"
 
 [extra]
-# Put all your custom variables here
+author = "artemchandragupta"
+email = "iac@scientiac.space"
+profile = "/res/thumbnail.png"
+
+bio = "A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does."
+
+github_user = "artemchandragupta"

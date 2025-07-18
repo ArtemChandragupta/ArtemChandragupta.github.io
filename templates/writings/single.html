@@ -2,10 +2,15 @@
 
 {% block content %}
 <div class="logs">
-<h1 class="title">
-  {{ section.title }}
+<h1 class="title-writings">
+  {{ term.name }}
 </h1>
-  
+
+<head>
+    <!-- Измените текст внутри тега <title> -->
+    <title>artem::[topic]→[{{ term.name }}]</title>
+</head>
+
   {% for page in paginator.pages %}
 		<article class="listing">
 			<h2><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
@@ -14,7 +19,7 @@
 	{% endfor %}
 
 {% if paginator.last != paginator.first %}
-
+  
 <nav data-style="none" class="pagination">
   {% if paginator.previous %}
   <a class="page-nav" href="{{ paginator.previous }}">Prior</a>
@@ -36,5 +41,3 @@
 {% endif %}
 
 {% endblock content %}
-
-

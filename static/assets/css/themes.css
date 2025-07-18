@@ -1,0 +1,46 @@
+:root[data-theme] {
+    --background-color: var(--background-color-0);
+    --color-comments: var(--color);
+}
+
+:root[data-theme="gruvbox-light"] {
+    --background-image: #fbf1c7;
+    --background-color-0: #fbf1c7;
+    --background-color-1: #ebdbb2;
+    --color: #3c3836;
+    --color-comments: #928374;
+    --text-highlight-0: #9d0006;
+    --text-highlight-1: #076678;
+    --text-highlight-2: #8f3f71;
+    --text-highlight-3: #427b58;
+    --text-highlight-4: #b57614;
+    --text-highlight-5: #79740e;
+    --note-color: #427b58;
+    --tip-color: #076678;
+    --important-color: #8f3f71;
+    --warning-color: #9d0006;
+    --caution-color: #b57614;
+    /* --font-family-swap: Latin Modern; */
+    --font-family-swap: Stix Two Text;
+}
+
+:root[data-theme="gruvbox-dark"] {
+    --background-image: #282828;
+    --background-color-0: #282828;
+    --background-color-1: #504945;
+    --color: #ebdbb2;
+    --color-comments: #a8a8a8;
+    --text-highlight-0: #fb4934;
+    --text-highlight-1: #83a598;
+    --text-highlight-2: #d3869b;
+    --text-highlight-3: #8ec07c;
+    --text-highlight-4: #fabd2f;
+    --text-highlight-5: #b8bb26;
+    --note-color: #8ec07c;
+    --tip-color: #83a598;
+    --important-color: #d3869b;
+    --warning-color: #fb4934;
+    --caution-color: #fabd2f;
+    /* --font-family-swap: Latin Modern; */
+    --font-family-swap: Stixr Two Text;
+}
