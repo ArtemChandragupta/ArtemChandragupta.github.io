@@ -27,14 +27,6 @@
             <p></p>
         {% endif %}
 
-        <!-- h-card for the author, useful if you display author information -->
-        <div class="hidden p-author h-card">
-          <a class="u-url" href="{{ config.base_url }}" rel="me">
-            <img class="u-photo" src="{{ config.extra.profile }}" alt="Profile photo of {{ config.author }}">
-            <span class="p-name">{{ config.author }}</span>
-          </a>
-        </div>
-
         <div class="e-content">
             {{ page.content | safe }}
         </div>
