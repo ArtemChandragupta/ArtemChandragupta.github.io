@@ -34,13 +34,13 @@ katex = true
 
 ```jl
 function simulate_system(;
-    Ta = 7,
-    Tπ = 0.4,
-    Ts = 0.7,
-    δω = 0.12,
-	ηг = t -> t >= 2 ? -1 : 0.0,
-	u0  = [0.0, 0.0, 0.0],
-    tspan = (0.0, 30.0)
+  Ta = 7,
+  Tπ = 0.4,
+  Ts = 0.7,
+  δω = 0.12,
+  ηг = t -> t >= 2 ? -1 : 0.0,
+  u0  = [0.0, 0.0, 0.0],
+  tspan = (0.0, 30.0)
 )
     function system!(du, u, p, t)
         φ, π, ξ = u
@@ -51,7 +51,7 @@ function simulate_system(;
     end
 	
     prob = ODEProblem(system!, u0, tspan)
-    solve(prob, Tsit5(), reltol=1e-6, abstol=1e-6)
+    solve(prob,Tsit5(),reltol=1e-6,abstol=1e-6)
 end
 ```
 
