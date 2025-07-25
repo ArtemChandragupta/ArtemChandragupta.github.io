@@ -20,7 +20,6 @@
     --important-color: #8f3f71;
     --warning-color: #9d0006;
     --caution-color: #b57614;
-    /* --font-family-swap: Latin Modern; */
     --font-family-swap: Stix Two Text;
 }
 
@@ -41,6 +40,5 @@
     --important-color: #d3869b;
     --warning-color: #fb4934;
     --caution-color: #fabd2f;
-    /* --font-family-swap: Latin Modern; */
     --font-family-swap: Stixr Two Text;
 }
