@@ -1,35 +1,7 @@
 const themes = {
-  everforest: [
-    'light',
-    'dark'
-  ],
   gruvbox: [
     "light",
     "dark"
-  ],
-  night: [
-    'solis',
-    'spaceduck',
-    'gotham',
-    'dracula'
-  ],
-  nord: [
-    'light',
-    'dark'
-  ],
-  one: [
-    'light',
-    'dark'
-  ],
-  tokyo: [
-    'night',
-    'night-light'
-  ],
-  catppuccin: [
-    'latte',
-    'frappe',
-    'macchiato',
-    'mocha'
   ],
 }
 

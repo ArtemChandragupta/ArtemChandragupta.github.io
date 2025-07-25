@@ -172,7 +172,7 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) { /* This styling only 
 
 nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
   flex-grow: 1;
-  margin: calc((var(--line-height) * 0.5rem) - var(--line-width)) var(--half-line); /* Put half a line's height on both top and bottom, then remove the width of the border */
+  /* margin: calc((var(--line-height) * 0.5rem) - var(--line-width)) var(--half-line); /* Put half a line's height on both top and bottom, then remove the width of the border */ */
   text-transform: uppercase;
 }
 
