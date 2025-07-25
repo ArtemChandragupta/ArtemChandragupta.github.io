@@ -15,10 +15,6 @@ minify_html = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
 
-# generate rss feed
-feed_filenames = [ "atom.xml" ]
-generate_feeds = true
-
 # make lists according to assigned tags
 taxonomies = [
     {name = "writings", feed = true, paginate_by = 12},
