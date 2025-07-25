@@ -2,7 +2,7 @@
 title = "Thesis-1"
 date = 2025-07-15
 [taxonomies]
-writings = ["Reports"]
+writings = ["reports"]
 [extra]
 katex = true
 +++
