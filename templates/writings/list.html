@@ -14,7 +14,7 @@
     <title>artem::topics</title>
 </head>
 
-<h2 class="subtitle">{{ terms | length }} writings in total.</h2>
+<!-- <h2 class="subtitle">{{ terms | length }} writings in total.</h2> -->
 
 {% for tag in terms %}
 <h2><a href="{{ get_taxonomy_url(kind='writings', name=tag.name) }}"><b>{{tag.name}} <sup>{{ tag.pages | length }}</sup></b></a></h2>
