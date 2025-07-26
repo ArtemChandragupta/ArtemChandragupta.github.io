@@ -1,13 +1,11 @@
 const themes = {
-  gruvbox: [
-    "light",
-    "dark"
-  ],
+  "light",
+  "dark"
 }
 
 const defaultThemes = {
-  light: "gruvbox-light",
-  dark: "gruvbox-dark"
+  light: "light",
+  dark: "dark"
 }
 
 const prefersDark = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
