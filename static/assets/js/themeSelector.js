@@ -38,12 +38,12 @@ function updateThemeSelector() {
   q('#themeSelector').innerHTML = html;
 
   // get colors
-  // const colors = {
-  //   fill: getComputedStyle(q('.main-background'))['backgroundColor'],
-  //   stroke: getComputedStyle(q('.main-background'))['color']
-  // }
+  const colors = {
+    fill: getComputedStyle(q('.main-background'))['backgroundColor'],
+    stroke: getComputedStyle(q('.main-background'))['color']
+  }
 
-  // document.querySelector('meta[name="theme-color"]').setAttribute("content", colors.fill);
+  document.querySelector('meta[name="theme-color"]').setAttribute("content", colors.fill);
 
 }
 
