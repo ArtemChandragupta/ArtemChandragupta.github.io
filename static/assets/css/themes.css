@@ -3,7 +3,7 @@
     --color-comments: var(--color);
 }
 
-:root[data-theme="light"] {
+:root[data-theme="gruvbox-light"] {
     --background-image: #fbf1c7;
     --background-color-0: #fbf1c7;
     --background-color-1: #ebdbb2;
@@ -23,7 +23,7 @@
     --font-family-swap: Stix Two Text;
 }
 
-:root[data-theme="dark"] {
+:root[data-theme="gruvbox-dark"] {
     --background-image: #282828;
     --background-color-0: #282828;
     --background-color-1: #504945;
