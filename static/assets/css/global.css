@@ -382,7 +382,6 @@ button:hover {
 	bottom: 2rem;
 	max-height: calc(100% - 4rem);
 	overflow: auto;
-  box-shadow: var(--box-shadow);
 }
 
 #themeSelector > details {
