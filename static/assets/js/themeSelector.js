@@ -1,6 +1,8 @@
 const themes = {
-  "light",
-  "dark"
+  gruvbox: [
+    "light",
+    "dark"
+  ]
 }
 
 const defaultThemes = {
