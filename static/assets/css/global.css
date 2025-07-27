@@ -241,7 +241,7 @@ a.codewithlove {
 button, a.button {
 	/* padding: calc(0.4 * var(--one-line)) calc(var(--one-line)); */
 	/* border-radius: var(--half-line); */
-	/* border-width: 0; */
+	border-width: 0;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -267,7 +267,8 @@ button:hover {
 #themeSelector {
 	list-style: none;
   z-index: 201;
-	padding: calc(0.4 * var(--one-line)) calc(0.6 * var(--one-line));
+  padding:0;
+	/* padding: calc(0.4 * var(--one-line)) calc(0.6 * var(--one-line)); */
 	margin: 0;
 	border-radius: var(--half-line);
 	background-color: var(--background-color-1);
