@@ -41,7 +41,7 @@ katex = true
 
 В общем виде методика вычислений показана ниже
 
-![fig2](/images/Thesis-1/main.svg)
+![fig2](/images/Thesis-1/scheme.svg)
 *Блок-схема алгоритма вычислений*
 
 > Обозначение:
