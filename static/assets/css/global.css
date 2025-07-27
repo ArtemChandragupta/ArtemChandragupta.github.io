@@ -265,6 +265,7 @@ button:hover {
   padding: 0;
 	background: none;
 	display: inline-block;
+	color: red;
 	max-height: calc(100% - 4rem);
 	overflow: auto;
 }
