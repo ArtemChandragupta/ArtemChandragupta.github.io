@@ -272,9 +272,9 @@ button:hover {
 	border-radius: var(--half-line);
 	background-color: var(--background-color-1);
 	display: inline-block;
-	position: fixed;
-	right: 2rem;
-	bottom: 2rem;
+	/* position: fixed; */
+	/* right: 2rem; */
+	/* bottom: 2rem; */
 	max-height: calc(100% - 4rem);
 	overflow: auto;
 }
