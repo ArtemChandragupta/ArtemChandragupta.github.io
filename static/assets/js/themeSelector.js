@@ -21,7 +21,7 @@ function toggleTheme() {
 
 function initThemeButton() {
   const button = document.createElement('button');
-  button.id = 'themeSelector';
+  button.id = 'themeButton';
   button.textContent = theme.includes('light') ? 'LIGHT' : 'DARK';
   button.title = 'Сменить тему';
   button.addEventListener('click', toggleTheme);
@@ -37,7 +37,7 @@ function setTheme(id) {
 }
 
 function updateThemeButton() {
-  const button = q('#themeSelector');
+  const button = q('#themeButton');
   if (button) {
     button.textContent = theme.includes('light') ? 'LIGHT' : 'DARK';
   }
