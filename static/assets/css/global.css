@@ -266,10 +266,10 @@ button:hover {
   padding: 0;
 	background: none;
 	display: inline-block;
-	color: var(--text-highlight-0);
-	cursor: pointer;
-	max-height: calc(100% - 4rem);
-	overflow: auto;
+	/* color: var(--text-highlight-0); */
+	/* cursor: pointer; */
+	/* max-height: calc(100% - 4rem); */
+	/* overflow: auto; */
 }
 
 #themeSelector > details {
@@ -299,7 +299,7 @@ button:hover {
 
 /* Анимация полоски при наведении (как у других ссылок) */
 @media (prefers-reduced-motion: no-preference) {
-  #button::after {
+  #themeButton::after {
     content: '';
     width: 0;
     height: var(--line-width);
@@ -311,8 +311,8 @@ button:hover {
     left: 0;
   }
 
-  #button:hover::after,
-  #button:focus::after {
+  #themeButton:hover::after,
+  #themeButton:focus::after {
     width: 100%;
   }
 }
