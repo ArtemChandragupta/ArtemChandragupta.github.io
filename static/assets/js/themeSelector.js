@@ -37,7 +37,7 @@ function setTheme(id) {
 }
 
 function updateThemeButton() {
-  const button = q('#themeToggle');
+  const button = q('#themeSelector');
   if (button) {
     button.textContent = theme.includes('light') ? 'LIGHT' : 'DARK';
   }
