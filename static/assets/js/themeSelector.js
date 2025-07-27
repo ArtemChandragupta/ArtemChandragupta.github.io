@@ -21,7 +21,7 @@ function toggleTheme() {
 
 function initThemeButton() {
   const button = document.createElement('button');
-  button.id = 'themeToggle';
+  button.id = 'themeSelector';
   button.textContent = theme.includes('light') ? 'LIGHT' : 'DARK';
   button.title = 'Сменить тему';
   button.addEventListener('click', toggleTheme);
