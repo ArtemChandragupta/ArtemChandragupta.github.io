@@ -22,7 +22,7 @@ function toggleTheme() {
 function initThemeButton() {
   const button = document.createElement('button');
   button.id = 'themeToggle';
-  button.textContent = theme.includes('light') ? '🌞' : '🌙';
+  button.textContent = theme.includes('light') ? 'light' : 'dark';
   button.title = 'Сменить тему';
   button.addEventListener('click', toggleTheme);
   
@@ -39,7 +39,7 @@ function setTheme(id) {
 function updateThemeButton() {
   const button = q('#themeToggle');
   if (button) {
-    button.textContent = theme.includes('light') ? '🌞' : '🌙';
+    button.textContent = theme.includes('light') ? 'light' : 'dark';
   }
 }
 
