@@ -265,7 +265,8 @@ button:hover {
   padding: 0;
 	background: none;
 	display: inline-block;
-	color: red;
+	color: var(--text-highlight-0);
+	cursor: pointer;
 	max-height: calc(100% - 4rem);
 	overflow: auto;
 }
