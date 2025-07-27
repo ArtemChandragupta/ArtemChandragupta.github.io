@@ -246,7 +246,7 @@ button, a.button {
 	/* display: flex; */
 	/* flex-direction: row; */
 	justify-content: space-between;
-	background-color: none;
+	background: none;
 	/* box-shadow: var(--box-shadow); */
 }
 
@@ -272,7 +272,7 @@ button:hover {
 	/* padding: calc(0.4 * var(--one-line)) calc(0.6 * var(--one-line)); */
 	margin: 0;
 	/* border-radius: var(--half-line); */
-	background-color: none;
+	background: none;
 	display: inline-block;
 	/* position: fixed; */
 	/* right: 2rem; */
