@@ -239,15 +239,10 @@ a.codewithlove {
 }
 
 button, a.button {
-	/* padding: calc(0.4 * var(--one-line)) calc(var(--one-line)); */
-	/* border-radius: var(--half-line); */
 	border-width: 0;
 	padding: 0;
-	/* display: flex; */
-	/* flex-direction: row; */
 	justify-content: space-between;
 	background: none;
-	/* box-shadow: var(--box-shadow); */
 }
 
 .colored {
@@ -255,7 +250,6 @@ button, a.button {
 }
 
 button:hover {
-	/* box-shadow:  0 0 0.6rem var(--text-highlight-0); */
 	color: var(--box-shadow);
 	transition: filter 0.3s ease;
 }
@@ -269,14 +263,9 @@ button:hover {
 	list-style: none;
   z-index: 201;
   padding: 0;
-	/* padding: calc(0.4 * var(--one-line)) calc(0.6 * var(--one-line)); */
-	margin: 0;
-	/* border-radius: var(--half-line); */
+	margin: calc((var(--line-height) * 0.5rem) - var(--line-width)) var(--half-line);
 	background: none;
 	display: inline-block;
-	/* position: fixed; */
-	/* right: 2rem; */
-	/* bottom: 2rem; */
 	max-height: calc(100% - 4rem);
 	overflow: auto;
 }
