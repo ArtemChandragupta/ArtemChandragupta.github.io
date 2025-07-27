@@ -246,7 +246,7 @@ button, a.button {
 	flex-direction: row;
 	justify-content: space-between;
 	background-color: var(--background-color-1);
-	box-shadow: var(--box-shadow);
+	/* box-shadow: var(--box-shadow); */
 }
 
 .colored {
@@ -254,7 +254,7 @@ button, a.button {
 }
 
 button:hover {
-	box-shadow:  0 0 0.6rem var(--text-highlight-0);
+	/* box-shadow:  0 0 0.6rem var(--text-highlight-0); */
 	color: var(--box-shadow);
 	transition: filter 0.3s ease;
 }
