@@ -263,7 +263,6 @@ button:hover {
 	list-style: none;
   z-index: 201;
   padding: 0;
-	/* margin: calc((var(--line-height) * 0.5rem) - var(--line-width)) var(--half-line); */
 	background: none;
 	display: inline-block;
 	max-height: calc(100% - 4rem);
@@ -297,7 +296,7 @@ button:hover {
 
 /* Анимация полоски при наведении (как у других ссылок) */
 @media (prefers-reduced-motion: no-preference) {
-  #themeSelector::after {
+  #button::after {
     content: '';
     width: 0;
     height: var(--line-width);
@@ -309,8 +308,8 @@ button:hover {
     left: 0;
   }
 
-  #themeSelector:hover::after,
-  #themeSelector:focus::after {
+  #button:hover::after,
+  #button:focus::after {
     width: 100%;
   }
 }
