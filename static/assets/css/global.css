@@ -297,25 +297,18 @@ button:hover {
 	margin: 0
 }
 
-/* Анимация полоски при наведении (как у других ссылок) */
-@media (prefers-reduced-motion: no-preference) {
-  #themeButton::after {
-    content: '';
-    width: 0;
-    height: var(--line-width);
-    display: block;
-    background: var(--color);
-    transition: width 150ms ease;
-    position: absolute;
-    bottom: calc(-0.2 * var(--one-line));
-    left: 0;
-  }
-
-  #themeButton:hover::after,
-  #themeButton:focus::after {
-    width: 100%;
-  }
+#themeButton {
+  /* border: 2px solid #ccc; */
+  color: var(--text-highlight-0);
+  /* Анимации */
+  transition: background 0.3s, transform 0.2s;
 }
+
+#themeButton:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
 
 /* Search Container */
 .search-container
