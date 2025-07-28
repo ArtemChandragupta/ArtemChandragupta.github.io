@@ -456,7 +456,7 @@ figcaption {
 	display: inline-block;
 	padding: 0.1rem 0.5rem;
 	font-size: 0.8rem;
-	border-radius:  0.25rem;;
+	border-radius:  0.25rem;
 	background-color: var(--background-color-1);
 }
 
@@ -509,7 +509,7 @@ aside > p {
 	margin: 0 var(--half-line) var(--half-line);
 }
 
-.youtube-embed, .mastodon-embed{
+.youtube-embed {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -605,11 +605,7 @@ pre {
     display: none !important;
     position: absolute;	
   }
-	
-	#webmention {
-    display: none !important;
-    position: absolute;
-	}
+
 	.u-category {
     display: none !important;
     position: absolute;
