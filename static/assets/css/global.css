@@ -307,7 +307,7 @@ button:hover {
 
 #themeButton::after {
   content: '';
-  /* position: absolute; */
+  position: absolute;
   bottom: 0;
   left: 0;
   width: 0;
