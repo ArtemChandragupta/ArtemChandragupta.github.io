@@ -261,15 +261,9 @@ button:hover {
 
 /* Theme Selector */
 #themeSelector {
-	list-style: none;
-  z-index: 201;
   padding: 0;
 	background: none;
 	display: inline-block;
-	/* color: var(--text-highlight-0); */
-	/* cursor: pointer; */
-	/* max-height: calc(100% - 4rem); */
-	/* overflow: auto; */
 }
 
 #themeSelector > details {
@@ -298,11 +292,8 @@ button:hover {
 }
 
 #themeButton {
-  /* border: 2px solid #ccc; */
   color: var(--text-highlight-0);
   position: relative;
-  /* Анимации */
-  /* transition: background 0.3s, transform 0.2s; */
 }
 
 #themeButton::after {
@@ -320,12 +311,6 @@ button:hover {
 #themeButton:focus::after {
   width: 100%;
 }
-
-/* #themeButton:hover { */
-  /* background: #e0e0e0; */
-  /* transform: translateY(-2px); */
-/* } */
-
 
 /* Search Container */
 .search-container
