@@ -301,13 +301,29 @@ button:hover {
   /* border: 2px solid #ccc; */
   color: var(--text-highlight-0);
   /* Анимации */
-  transition: background 0.3s, transform 0.2s;
+  /* transition: background 0.3s, transform 0.2s; */
 }
 
-#themeButton:hover {
-  background: #e0e0e0;
-  transform: translateY(-2px);
+#themeButton::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.15s ease;
 }
+
+#themeButton:hover::after,
+#themeButton:focus::after {
+  width: 100%;
+}
+
+/* #themeButton:hover { */
+  /* background: #e0e0e0; */
+  /* transform: translateY(-2px); */
+/* } */
 
 
 /* Search Container */
