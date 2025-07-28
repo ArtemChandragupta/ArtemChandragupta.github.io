@@ -300,6 +300,7 @@ button:hover {
 #themeButton {
   /* border: 2px solid #ccc; */
   color: var(--text-highlight-0);
+  position: relative;
   /* Анимации */
   /* transition: background 0.3s, transform 0.2s; */
 }
@@ -307,8 +308,8 @@ button:hover {
 #themeButton::after {
   content: '';
   /* position: absolute; */
-  /* bottom: 0; */
-  /* left: 0; */
+  bottom: 0;
+  left: 0;
   width: 0;
   height: var(--line-width);
   background: var(--color);
