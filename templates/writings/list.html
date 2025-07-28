@@ -7,7 +7,7 @@
 </h1>
 
 <h2>
-  Поиск по теме
+  Поиск по темам
 </h2>
 
 <head>
@@ -20,6 +20,9 @@
 <h2><a href="{{ get_taxonomy_url(kind='writings', name=tag.name) }}"><b>{{tag.name}} <sup>{{ tag.pages | length }}</sup></b></a></h2>
 {% endfor %}
 
+<h2>
+  Поиск по содержанию
+</h2>
 
 <div class="search-container">
 <input id="search" type="search" placeholder="Search">
