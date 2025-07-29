@@ -3,7 +3,11 @@
 
 #let v_stroke = rgb("#282828")
 
-#set page(fill: rgb("#EBDBB2"))
+#set page(
+  fill: rgb("#EBDBB2"),
+  margin: 0.2cm,
+  height: 23cm
+)
 #set text(size:11pt, fill: v_stroke)
 
 #figure(
@@ -52,9 +56,8 @@
     edge("=="),
 
     node((0,7), corner-radius: 10pt, [
-      Проверка конфузорности РК \
-      Профилирование сопловой лопатки \
-      Проверка конфузоности СА
+      Профилирование РК и СА \
+      Проверка конфузорности РК и СА \
     ]),
 
     node((1,5), name: <FF>, [
@@ -71,8 +74,8 @@
       $ [ [R]_i ] <- [R]_i: [R]_i.p_2 arrow.tr arrow.tr $
     ]),
     edge(),
-    node((1,7), shape: hexagon, 
-    fill: gradient.linear(green,red), 
+    node((1,7), shape: hexagon,
+    fill: gradient.linear(green,red),
     name: <CC>, [
       Выбираем "хорошие" $f$ и $rho_k$ \ 
       $ [ [R]_i ] <- [R]_i^5 : |alpha_2| >= 86 degree$, $|Delta rho_k| <= 0.1$
@@ -81,11 +84,12 @@
     ]),
     node((1.9,5),[меняем $alpha_1$, $beta_2^*$], shape: parallelogram.with(angle: 30deg), name:<Lub>),
     edge(<CC.west>, (0.5,7),(0.5,6),<RR>, "-|>", [$F, rho_k$]),
-    node(enclose:((1,5),(1,7),(1.9,5)), stroke:(dash:"dashed", paint: rgb("#458588")), inset: 18pt ),
     edge(<F>,<FF>, "-|>"),
     edge(<CC>,(1.9,7),<Lub>, "-|>"),
     edge(<Lub>,<FF>, "-|>"),
 
+    node(enclose:((0.5,0),(3,4.3)), stroke:(dash: "dashed", paint: rgb("#D65D0E"))),
+    node(enclose:((0.5,4.6),(3,8)), stroke:(dash: "dashed", paint: rgb("#458588"))),
 
     node((1,1), name: <Gi>, [
       Для $G_i in [120 ... 180] $: \
@@ -118,6 +122,5 @@
       меняем $[phi],[psi]$
     ]),
     edge(<Shu>,<Gi>, "-|>"),
-    node(enclose:((1,1),(1,2),(1,4),(1.8,1)), stroke:( dash: "dashed", paint: rgb("#D65D0E")), inset: 20pt ),
   ),
 )
