@@ -63,5 +63,5 @@ katex = true
 ![fig3](/images/Thesis-1-Julia/DecayingTurbulence2D.gif)
 *Затухающая турбулентность, симулируемая IncompressibleNavierStokes.jl и визуализированная Makie.jl*
 
-![fig3](/images/Thesis-1-Julia/Julia.gif)
+![fig3](/images/Thesis-1-Julia/julia.gif)
 *Дорожка Кармана на логотипе Julia, симулируемая Waterlily.jl и визуализированная Makie.jl*
