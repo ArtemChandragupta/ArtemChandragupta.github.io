@@ -58,3 +58,10 @@ katex = true
 ![fig2](/images/Thesis-1-Julia/ferrite.gif)
 *Процесс ковки (один удар), симулируемый Ferrite.jl и визуализированный Makie.jl*
 
+Для симуляции жидкости и газа можно использовать [WaterLily.jl](https://github.com/WaterLily-jl/WaterLily.jl) и [IncompressibleNavierStokes.jl](https://github.com/agdestein/IncompressibleNavierStokes.jl/tree/main).
+
+![fig3](/images/Thesis-1-Julia/DecayingTurbulence2D.gif)
+*Затухающая турбулентность, симулируемая IncompressibleNavierStokes.jl и визуализированная Makie.jl*
+
+![fig3](/images/Thesis-1-Julia/Julia.gif)
+*Дорожка Кармана на логотипе Julia, симулируемая Waterlily.jl и визуализированная Makie.jl*
