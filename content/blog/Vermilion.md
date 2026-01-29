@@ -1,5 +1,5 @@
 +++
-title = "Мечта Абу Сеида"
+title = "Вермильон"
 date = 2026-01-29
 [taxonomies]
 writings = ["poems"]
