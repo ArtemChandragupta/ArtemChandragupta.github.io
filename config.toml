@@ -27,7 +27,7 @@ include_path = false
 include_content = true
 
 [markdown.highlighting]
-theme = "gruvbox-dark"
+theme = "gruvbox-dark-medium"
 
 [extra]
 author = "artemchandragupta"
