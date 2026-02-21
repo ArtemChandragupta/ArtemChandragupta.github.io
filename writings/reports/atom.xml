@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>artem::scriptorium - reports</title>
+    <link rel="self" type="application/atom+xml" href="https://artemchandragupta.github.io/writings/reports/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://artemchandragupta.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-02-03T00:00:00+00:00</updated>
+    <id>https://artemchandragupta.github.io/writings/reports/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Создание быстрой VM для Windows на Linux</title>
+        <published>2026-02-03T00:00:00+00:00</published>
+        <updated>2026-02-03T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              artemchandragupta
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://artemchandragupta.github.io/blog/vm/"/>
+        <id>https://artemchandragupta.github.io/blog/vm/</id>
+        
+        <content type="html" xml:base="https://artemchandragupta.github.io/blog/vm/">&lt;h1 id=&quot;vvedenie&quot;&gt;Введение&lt;&#x2F;h1&gt;
+&lt;p&gt;В этой публикации описан процесс создания виртуальной машины с Windows в виде гостевой ОС, которая будет обладать важным для инженерного ПО свойством - быстродействием.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;nachal-nye-trebovaniia&quot;&gt;Начальные требования&lt;&#x2F;h1&gt;
+&lt;p&gt;Перед началом нужно:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Установить KVM, Libvirt, Qemu и VMM. Процесс установки зависит от дистрибутива;&lt;&#x2F;li&gt;
+&lt;li&gt;Скачать образ диска с VirtIO драйверами для гостевой ОС;&lt;&#x2F;li&gt;
+&lt;li&gt;Скачать образ диска с Windows.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h1 id=&quot;sozdanie-virtual-noi-mashiny&quot;&gt;Создание виртуальной машины&lt;&#x2F;h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Зайти в меню настроек Virtual Machine Manager и включить редактирование XML - это нужно для последующих манипуляций.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;VM-1.png&quot; alt=&quot;fig1&quot; &#x2F;&gt;
+&lt;em&gt;Настройки VMM&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;VM-2.png&quot; alt=&quot;fig2&quot; &#x2F;&gt;
+&lt;em&gt;Включено редактирование XML&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;Нажать на кнопку создания новой виртуальной машины и проделать очевидные шаги настройки до меню с выбором имени, где следует активировать кастомизацию перед установкой и нажать Finish. После этого откроется окно кастомизации.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;VM-3.png&quot; alt=&quot;fig3&quot; &#x2F;&gt;
+&lt;em&gt;Окно выбора имени VM&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;В пункте Overview проверить, что стоит чипсет Q35&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;VM-4.png&quot; alt=&quot;fig4&quot; &#x2F;&gt;
+&lt;em&gt;Чипсет Q35&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;ol start=&quot;4&quot;&gt;
+&lt;li&gt;В пункте CPUs проверить, что включен проброс ядер процессора.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;VM-5.png&quot; alt=&quot;fig5&quot; &#x2F;&gt;
+&lt;em&gt;Проброс ядер процессора&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;ol start=&quot;5&quot;&gt;
+&lt;li&gt;В пункте SATA Disk 1 необходимо изменить шину с SATA на VirtIO, специально оптимизированную для виртуальных машин. Это чрезвычайно важный пункт для быстродействия машины. Так как кеш нам не нужен, его тоже лучше отключить.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;VM-6.png&quot; alt=&quot;fig6&quot; &#x2F;&gt;
+&lt;em&gt;Настройка хранилища&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;ol start=&quot;6&quot;&gt;
+&lt;li&gt;Монтирование образа диска с VirtIO драйверами. Внизу списка устройств находится кнопка Add Hardware, во всплывающем окне выбираем Storage, в пункте Select or create custom storage выбираем образ диска VirtIO драйверов. Тип устройства выбираем как CDROM.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;VM-7.png&quot; alt=&quot;fig7&quot; &#x2F;&gt;
+&lt;em&gt;Монтирование диска с драйверами&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;ol start=&quot;7&quot;&gt;
+&lt;li&gt;В пункте NIC (Network Interface Controller) выбираем тип устройства VirtIO.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;VM-8.png&quot; alt=&quot;fig8&quot; &#x2F;&gt;
+&lt;em&gt;Настройка сети&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;ol start=&quot;8&quot;&gt;
+&lt;li&gt;Устройство Tablet можно удалить.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Таким образом, подготовка к установки гостевой ОС завершена.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;ustanovka-windows&quot;&gt;Установка Windows&lt;&#x2F;h1&gt;
+&lt;p&gt;Так как мы не хотим привязывать Microsoft аккаунт к гостевой системе, на время установки нужно отключить интернет. Для создания локального аккаунта надо нажать Shift+F10 и ввести в командную строку &lt;code&gt;oobe\bypassnro&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Так как в нашей конфигурации нет TPM и Secure Boot, проверку его наличия нужно отключить, нажав &lt;em&gt;Shift+F10&lt;&#x2F;em&gt; на экране связанной с этим ошибки ошибки, введя regedit, создав раздел &lt;code&gt;LabConfig&lt;&#x2F;code&gt; в &lt;code&gt;HKEY_LOCAL_MACHINE\SYSTEM\Setup&lt;&#x2F;code&gt; и добавив параметры &lt;em&gt;BypassTPMCheck&lt;&#x2F;em&gt;, &lt;em&gt;BypassSecureBootCheck&lt;&#x2F;em&gt; типа &lt;em&gt;Dword&lt;&#x2F;em&gt;, которым нужно присвоить значение 1.&lt;&#x2F;p&gt;
+&lt;p&gt;До окна выбора диска, на который будет установлена ОС, установка проходит обычно. Однако, в этом окне не будет ни одного диска - потому что для VirtIO хранилища необходимо подключить драйверы.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;WIN-1.webp&quot; alt=&quot;fig9&quot; &#x2F;&gt;
+&lt;em&gt;Окно выбора драйверов&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Чтобы установить VirtIO disk driver, надо нажать Load driver, затем Browse, CD Drive (E:), Viostor, w11, выбрать amd64 и нажать OK.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;WIN-2.webp&quot; alt=&quot;fig10&quot; &#x2F;&gt;
+&lt;em&gt;Выбор драйвера хранилища&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;WIN-3.webp&quot; alt=&quot;fig11&quot; &#x2F;&gt;
+&lt;em&gt;Установка драйвера хранилища&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;WIN-4.webp&quot; alt=&quot;fig12&quot; &#x2F;&gt;
+&lt;em&gt;После установки драйверов видно хранилище&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Помимо драйверов хранилища, нужно установить драйверы для сетевого контроллера:&lt;&#x2F;p&gt;
+&lt;p&gt;Нажимаем Load driver, затем Browse, CD Drive (E:), NetKVM, w11, выбрать amd64, и нажать OK.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;WIN-5.webp&quot; alt=&quot;fig13&quot; &#x2F;&gt;
+&lt;em&gt;Установка драйвера сети&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;После завершения установки ОС, необходимо установить клиентскую часть VirtIO драйверов:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;VM&#x2F;WIN-6.webp&quot; alt=&quot;fig14&quot; &#x2F;&gt;
+&lt;em&gt;Установка клиентской части VirtIO драйверов&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Теперь можно сделать разрешение экрана гостевой ОС адаптивным. Для этого в меню VMM нужно нажать на View, выбрать пункт Scale Display и активировать Auto resize VM with window.&lt;&#x2F;p&gt;
+&lt;p&gt;Теперь гостевая система готова к использованию.&lt;&#x2F;p&gt;
+&lt;p&gt;Также для поддержки drag-and-drop и бесшовного прохождения курсора через границу гостевой системы можно установить spice-драйвера, как на хост, так и на гостевую систему.&lt;&#x2F;p&gt;
+&lt;p&gt;Также, из-за отсутствия &quot;железной&quot; видеокарты у гостевой системы, её присутствие эмулируется на процессоре. Об этом нужно оповестить приложения, создав переменную среды &lt;code&gt;QT_OPENGL=desktop&lt;&#x2F;code&gt;. Без неё часть модулей Ansys и SolidWorks не работает.&lt;&#x2F;p&gt;
+&lt;p&gt;Для того чтобы не вводить пароль каждый раз при входе в гостевую ОС, нужно ввести сочетание клавиш &lt;code&gt;Win+R&lt;&#x2F;code&gt;, после чего написать &lt;code&gt;netplwiz&lt;&#x2F;code&gt;. В открывшемся меню надо выбрать свой локальный аккаунт и снять галочку с пункта о необходимости ввода пароля при входе.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Julia</title>
+        <published>2025-07-15T00:00:00+00:00</published>
+        <updated>2025-07-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              artemchandragupta
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://artemchandragupta.github.io/blog/julia/"/>
+        <id>https://artemchandragupta.github.io/blog/julia/</id>
+        
+        <content type="html" xml:base="https://artemchandragupta.github.io/blog/julia/">&lt;h1 id=&quot;vvedenie&quot;&gt;Введение&lt;&#x2F;h1&gt;
+&lt;p&gt;Университет дает &lt;strong&gt;возможность&lt;&#x2F;strong&gt; для образования и реализации, а не &lt;strong&gt;гарантирует&lt;&#x2F;strong&gt; их. Одним из способов эти возможности раскрыть - делать то, что полезно и интересно. Для меня такой вещью является, например, программирование, в котором я нахожу возможность сделать больше, понять глубже, а иногда и получить что-то элегантное и красивое.&lt;&#x2F;p&gt;
+&lt;p&gt;Студенту-энергетику может быть полезна возможность проводить вычисления с ветвлением, графико-аналитическими элементами, которые будут наглядным, воспроизводимыми и производительными. Такие возможности предоставляет инфраструктура разных языков программирования, из которых мой выбор пал на Julia.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;o-iazyke-julia&quot;&gt;О языке Julia&lt;&#x2F;h1&gt;
+&lt;p&gt;В качестве языка для выполнения вычислений &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;julialang.org&#x2F;&quot;&gt;julia&lt;&#x2F;a&gt; подходит хорошо. Это компилируемый язык, созданный специально для научных вычислений, можно воспринимать его как современную замену matlab. Преимущества у него следующие:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Обширная экосистема:
+&lt;ul&gt;
+&lt;li&gt;Пакеты для автоматического дифференцирования, конечноэлементных методов, etc.;&lt;&#x2F;li&gt;
+&lt;li&gt;Для построения графиков можно использовать &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;docs.makie.org&#x2F;stable&#x2F;&quot;&gt;Makie.jl&lt;&#x2F;a&gt;, более совершенный инструмент, чем тот же *matplotlib, для интерактивной работы есть &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;plutojl.org&#x2F;&quot;&gt;Pluto.jl&lt;&#x2F;a&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Стандартный пакетный менеджер прост в работе и редко &quot;ошибается&quot;. Впрочем, делает он это редко потому что сам компилирует все пакеты, а не использует бинарники, так что ±.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Элегантность языка:
+&lt;ul&gt;
+&lt;li&gt;Переменные могут быть названы всем набором символов юникода, чтобы $\phi_2^{opt}$ не превратилось в &lt;code&gt;phi_2-opt&lt;&#x2F;code&gt;. Читать и демонстрировать такой код гораздо проще!&lt;&#x2F;li&gt;
+&lt;li&gt;Современный и достаточно краткий синтаксис, хорошая система типов и структур данных позволяют формулировать действия кратко и точно.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Быстродействие:
+&lt;ul&gt;
+&lt;li&gt;Компиляция позволяет сложной логике исполняться быстро;&lt;&#x2F;li&gt;
+&lt;li&gt;Широкая поддержка параллельных вычислений заложена в дизайн языка и подразумевается как правило хорошего тона среди авторов пакетов.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;Julia&#x2F;surface_plot.svg&quot; alt=&quot;fig1&quot; &#x2F;&gt;
+&lt;em&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ArtemChandragupta&#x2F;TAR&quot;&gt;Характеристика системы регулирования&lt;&#x2F;a&gt;, изображённая Makie.jl&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Экосистема julia очень свободная - несмотря на то, что язык компилируемый, он не предназначен для распространения бинарников - как и готовые программы, так и пакеты (библиотеки) в нем распространяются как исходный код.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;o-poleznykh-paketakh&quot;&gt;О полезных пакетах&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;dlia-grafikov&quot;&gt;Для графиков&lt;&#x2F;h2&gt;
+&lt;p&gt;Существует две экосистемы для построения графиков - &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;docs.makie.org&#x2F;stable&#x2F;&quot;&gt;Makie.jl&lt;&#x2F;a&gt; и &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;docs.juliaplots.org&#x2F;stable&#x2F;&quot;&gt;Plots.jl&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Первый инструмент более совершенный в плане качества создаваемой картинки, её &quot;красоты&quot;, но иногда бывает сложен в работе. Помимо прочего, этот пакет позволяет создавать анимации, показывая результат работы симуляций.&lt;&#x2F;p&gt;
+&lt;p&gt;Второй инструмент представляет из себя классическую библиотеку для графиков, очень похож на &lt;em&gt;matplotlib&lt;&#x2F;em&gt;. Имеет несколько бэкендов, одним из которых &lt;em&gt;matplotlib&lt;&#x2F;em&gt; и является.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;dlia-differentsirovaniia&quot;&gt;Для дифференцирования&lt;&#x2F;h2&gt;
+&lt;p&gt;Используя &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;docs.sciml.ai&#x2F;DiffEqDocs&#x2F;stable&#x2F;&quot;&gt;DifferentialEquations.jl&lt;&#x2F;a&gt; можно численно решать системы дифференциальных уравнений. Пример можно найти по ссылке на рисунке выше.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;dlia-cfd&quot;&gt;Для CFD&lt;&#x2F;h2&gt;
+&lt;p&gt;Существует множество пакетов, например, &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;ferrite-fem.github.io&#x2F;Ferrite.jl&#x2F;stable&#x2F;&quot;&gt;Ferrite.jl&lt;&#x2F;a&gt;, предназначенный для поиска статических напряжений в твёрдых телах (и эластомеров).&lt;&#x2F;p&gt;
+&lt;p&gt;Для симуляции жидкости и газа можно использовать &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;WaterLily-jl&#x2F;WaterLily.jl&quot;&gt;WaterLily.jl&lt;&#x2F;a&gt; и &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;agdestein&#x2F;IncompressibleNavierStokes.jl&#x2F;tree&#x2F;main&quot;&gt;IncompressibleNavierStokes.jl&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;Julia&#x2F;julia.gif&quot; alt=&quot;fig3&quot; &#x2F;&gt;
+&lt;em&gt;Дорожка Кармана на логотипе Julia, симулируемая Waterlily.jl и визуализированная Makie.jl&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;interaktivnaia-doska-pluto-jl&quot;&gt;Интерактивная доска - &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;plutojl.org&#x2F;&quot;&gt;Pluto.jl&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;На этом моменте я бы остановился подробно, поскольку это очень хороший и дружелюбный способ взаимодействовать с языком и организовать код. Прообразом этой среды является &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;jupyter.org&#x2F;&quot;&gt;Jupyter&lt;&#x2F;a&gt;, от которого, впрочем, &lt;em&gt;Pluto&lt;&#x2F;em&gt; отличается довольно сильно.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;Pluto&lt;&#x2F;em&gt; имеет интерфейс в браузере, но работает на компьютере локально - интернет ему не нужен.&lt;&#x2F;p&gt;
+&lt;p&gt;Эта среда представляет из себя клетки, в которых следует писать код разделённый по функциям - то есть по смыслу. Клетки можно удалять, скрывать перемещать. Результат работы одной клетки видят другие, причем они знают, окуда он пришёл, и если обновится клетка от которой зависят другие, то они также обновятся. Разделение на клетки позволяет легко изменять и визуализировать код, получать промежуточные результаты, не путаться в структуре вычислений, заменять их части.&lt;&#x2F;p&gt;
+&lt;p&gt;В &lt;em&gt;Pluto&lt;&#x2F;em&gt; легко ставить пакеты - их не нужно устанавливать, нужно лишь написать в первом блоке &lt;code&gt;using ИМЯ&lt;&#x2F;code&gt;. После этого нужно подождать существенное время, когда пакет будет компилироваться. Таким способом происходит установка на каждую доску по отдельности, а не в систему в целом.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;Pluto&lt;&#x2F;em&gt; поддерживает также письмо юникодом - например, если хочется написать греческую букву альфа, нужно написать &lt;code&gt;\alp&lt;&#x2F;code&gt; (&lt;code&gt;\&lt;&#x2F;code&gt; и первые несколько букв, если написать одну - будет многовато вариантов) и нажать &lt;em&gt;TAB&lt;&#x2F;em&gt;, после чего выпадет список с подсказками, выбор варианта из которого свернет предыдущий escape-code до нужного символа. Для того чтобы написать подстрочный символ, нужно написать &lt;code&gt;\_a&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;ustanovka&quot;&gt;Установка&lt;&#x2F;h1&gt;
+&lt;p&gt;Для работы достаточно скачать компилятор языка &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;julialang.org&#x2F;install&#x2F;&quot;&gt;здесь&lt;&#x2F;a&gt;, в интерфейс которого можно попасть командой julia в терминале. Этот интерфейс - REPL - &lt;strong&gt;R&lt;&#x2F;strong&gt;ead &lt;strong&gt;E&lt;&#x2F;strong&gt;valuate &lt;strong&gt;P&lt;&#x2F;strong&gt;rint &lt;strong&gt;L&lt;&#x2F;strong&gt;oop - читает команду, выполняет ее и возвращает результат. Его можно использовать для простых вычислений, например, как калькулятор, а также им управляется пакетный менеджер языка и настройки среды. Из него же можно запускать уже написанные программы. В целом, это не удобно ни для чего, кроме установки пакетов.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;Julia&#x2F;REPL.png&quot; alt=&quot;fig4&quot; &#x2F;&gt;
+&lt;em&gt;Интерфейс компилятора - Julia REPL&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Для установки пакетов нужно так или иначе вызвать местный пакетный менеджер (например, нажать в интерфейсе компилятора &lt;code&gt;]&lt;&#x2F;code&gt;) и написать &lt;code&gt;add ИМЯ&lt;&#x2F;code&gt;.  В принципе, из пакетов можно поставить только &lt;em&gt;Pluto&lt;&#x2F;em&gt;, а всё остальное ставить уже на доски.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Thesis-1</title>
+        <published>2025-07-15T00:00:00+00:00</published>
+        <updated>2025-07-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              artemchandragupta
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://artemchandragupta.github.io/blog/thesis-1/"/>
+        <id>https://artemchandragupta.github.io/blog/thesis-1/</id>
+        
+        <content type="html" xml:base="https://artemchandragupta.github.io/blog/thesis-1/">&lt;h1 id=&quot;vvedenie&quot;&gt;Введение&lt;&#x2F;h1&gt;
+&lt;p&gt;Университет даёт &lt;strong&gt;возможность&lt;&#x2F;strong&gt; для образования и реализации, а не &lt;strong&gt;гарантирует&lt;&#x2F;strong&gt; их. Чтобы эту возможность раскрыть, студенту необходимо не просто слепо выполнять то, что от него требуют планы и преподаватели, но и задумываться над тем, что же он собственно делает, и может ли он сделать что-либо более содержательное, чем ему предлагается.&lt;&#x2F;p&gt;
+&lt;p&gt;Я считаю, что особенно это применимо к курсовой (и дипломной) работе. Когда нам, как студентам-турбинистам, предлагают провести выданные начальные данные через цепочку из методичек, написанных в седые годы, и программ, не раскрывающих того, что именно они делают с нашими числами, нам предлагают сделать совершенно несодержательную работу. Авторам методичек низкий поклон, но понимание чего человеку дадут их требования к попаданию в промежуток отношений и коэффициентов, едва ли имеющих физический смысл? Ansys и Solidworks, возможно, и проводят свои симуляции точнее, чем любые их аналоги, но какую ценность имеет результат их работы для того, кто как минимум хочет понимать, что он делает, а как максимум - сделать вычисления элегантными?&lt;&#x2F;p&gt;
+&lt;p&gt;В довесок к сказанному, наши методики предлагают выбирать случайные параметры из допущенного автором списка, не проводя никакого анализа на то, как от нашего выбора зависит результат вычислений и построений, а также является ли наш выбор оптимальным или хотя бы хорошим.&lt;&#x2F;p&gt;
+&lt;p&gt;Все эти мысли привели меня к тому, что методику, предложенную для выполнения курсовой, необходимо дополнить. С помощью умений программирования у меня есть возможность провести желаемый анализ, обращаться с данными более удобным образом, проигнорировать часть проприетарного программного обеспечения, а также красиво оформить с помощью систем компьютерной вёрстки.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;o-iazyke-julia&quot;&gt;О языке Julia&lt;&#x2F;h1&gt;
+&lt;p&gt;В качестве языка для выполнения вычислений я выбрал &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;julialang.org&#x2F;&quot;&gt;julia&lt;&#x2F;a&gt;. Это компилируемый язык, созданный специально для научных вычислений, можно воспринимать его как современную замену matlab. Преимущества у него следующие:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Обширная экосистема:
+&lt;ul&gt;
+&lt;li&gt;Пакеты для автоматического дифференцирования, конечноэлементных методов, etc.;&lt;&#x2F;li&gt;
+&lt;li&gt;Для построения графиков можно использовать &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;docs.makie.org&#x2F;stable&#x2F;&quot;&gt;Makie.jl&lt;&#x2F;a&gt;, более совершенный инструмент, чем тот же *matplotlib, для интерактивной работы есть &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;plutojl.org&#x2F;&quot;&gt;Pluto.jl&lt;&#x2F;a&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Стандартный пакетный менеджер прост в работе и редко &quot;ошибается&quot;. В прочем, делает он это редко потому что сам компилирует все пакеты, а не использует бинарники, так что ±.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Элегантность языка:
+&lt;ul&gt;
+&lt;li&gt;Переменные могут быть названы всем набором символов юникода, чтобы $\phi_2^{opt}$ не превратилось в &lt;code&gt;phi_2-opt&lt;&#x2F;code&gt;. Читать и демонстрировать такой код гораздо проще!&lt;&#x2F;li&gt;
+&lt;li&gt;Современный и достаточно краткий синтаксис, хорошая система типов и структур данных позволяют формулировать действия кратко и точно.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Быстродействие:
+&lt;ul&gt;
+&lt;li&gt;Компиляция позволяет сложной логике исполняться быстро;&lt;&#x2F;li&gt;
+&lt;li&gt;Широкая поддержка параллельных вычислений заложена в дизайн языка и подразумевается как правило хорошего тона среди авторов пакетов.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;Thesis-1&#x2F;surface_plot.svg&quot; alt=&quot;fig1&quot; &#x2F;&gt;
+&lt;em&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ArtemChandragupta&#x2F;TAR-1&quot;&gt;Характеристика системы регулирования&lt;&#x2F;a&gt;, изображённая Makie.jl&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Экосистема julia очень свободная - несмотря на то, что язык компилируемый, он не предназначен для распространения бинарников - как и готовые программы, так и пакеты (библиотеки) в нём распространяются как исходный код.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;metod-vychislenii&quot;&gt;Метод вычислений&lt;&#x2F;h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Алгоритмы вычислений будут изображаться в виде блок-схем со следующими обозначениями:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;$a$: параметр
+&lt;ul&gt;
+&lt;li&gt;Например, $G_{опт} = 250 {кг&#x2F;с}$;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;$[a]$: коллекция. Эквивалентно одному столбцу в таблице экселя
+&lt;ul&gt;
+&lt;li&gt;Например, входные данные или все рассчитанные параметры закрутки потока для одного сечения.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;$[a].b$: параметр $b$ из коллекции $[a]$
+&lt;ul&gt;
+&lt;li&gt;Например, $[C].n$ - частота вращения турбины из исходных данных&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;$[a]^c.b$: параметр $b$ из c-той части коллекции $[a]$. Эквивалентно c-тому столбцу из таблицы экселя.
+&lt;ul&gt;
+&lt;li&gt;Например, $[R]^5.\alpha_2$ - угол $\alpha_2$ для периферийного (пятого) сечения в расчете закрутки потока&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Схема вычислений по методике К. Л. Лапшина описана и показана ниже:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;Thesis-1&#x2F;scheme_initial.svg&quot; alt=&quot;fig2&quot; &#x2F;&gt;
+&lt;em&gt;Блок-схема алгоритма вычислений по методике К. Л. Лапшина&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Пояснение:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Начальные данные $[C]$, полученные из задания и рассчета турбоагрегата — данных, полученных с предыдущего семестра;&lt;&#x2F;li&gt;
+&lt;li&gt;Задаём давление на выходе из каждой ступени турбины $[p_2]$ и характерные коэффициенты $[\varphi]$ и $[\psi]$. Задавать их следует &lt;font color=&quot;#FB4934&quot;&gt;случайно&lt;&#x2F;font&gt; в рамках некоторого диапазона;&lt;&#x2F;li&gt;
+&lt;li&gt;Проводится первичный расчет, целью которого является получение параметров на выходе из турбины;&lt;&#x2F;li&gt;
+&lt;li&gt;Проводится расчет по ступеням;&lt;&#x2F;li&gt;
+&lt;li&gt;Проверяется совпадение расхода с расходом из исходных данных, проверяется совпадение сумм мощностей с мощностью из исхлдных данных. Если совпадения нет, возвращаемся к шагу 2;&lt;&#x2F;li&gt;
+&lt;li&gt;В некотором промежутке &lt;font color=&quot;#FB4934&quot;&gt;случайно&lt;&#x2F;font&gt; выбираются $F$, $\rho_k$ и лопаточные углы последней ступени $\alpha$ и $\beta$;&lt;&#x2F;li&gt;
+&lt;li&gt;Выполняется расчет закрутки потока на последней ступени по обратному закону. Результатом этого этапа являются данные $[R]$, необходимые для построения профилей лопаток;&lt;&#x2F;li&gt;
+&lt;li&gt;Проверяется монотонный рост давлений $p_2$ на выходе из последней ступени по радиусу. Если монотонного роста нет, возвращаемся к шагу 7;&lt;&#x2F;li&gt;
+&lt;li&gt;Построение профилей лопаток, проверка их на конфузорность. Это заключительный этап, после него следует моделирование и расчет на прочность.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Как видно, эта схема императивна и содержит &quot;плохие&quot; шаги. Она предлагает два раза выбрать &lt;font color=&quot;#FB4934&quot;&gt;случайный&lt;&#x2F;font&gt; набор параметров, к которому применит проверки типа &quot;прошёл - не прошёл&quot;, не предполагая никакого анализа на то, насколько эти параметры хороши.&lt;&#x2F;p&gt;
+&lt;p&gt;Я предлагаю дополнение, которое позволяет выбрать параметры на пунктах &lt;strong&gt;2&lt;&#x2F;strong&gt; и &lt;strong&gt;6&lt;&#x2F;strong&gt; осмысленно, на схеме это соответственно представлено красным и голубым блоками.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;Thesis-1&#x2F;scheme.svg&quot; alt=&quot;fig2&quot; &#x2F;&gt;
+&lt;em&gt;Блок-схема дополненного алгоритма вычислений&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;rassmotrim-krasnyi-blok&quot;&gt;Рассмотрим красный блок.&lt;&#x2F;h3&gt;
+&lt;p&gt;В этом блоке происходит подбор таких параметров $\varphi$ и $\psi$, при которых угол выхода потока на среднем сечении оптимальный.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;itogi-i-plany&quot;&gt;Итоги и планы&lt;&#x2F;h1&gt;
+&lt;p&gt;Помимо сделанного в этой работе, я хочу провести расчет на прочность и&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

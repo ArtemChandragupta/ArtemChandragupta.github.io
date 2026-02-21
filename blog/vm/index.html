@@ -1,0 +1,166 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/reports.css rel=stylesheet><meta content=reports property=og:type><meta content=ArtemChandragupta.github.io property=og:site_name><meta content=https://artemchandragupta.github.io/logo/thumbnail.png property=og:image><title>Создание быстрой VM для Windows на Linux</title><meta content="Создание быстрой VM для Windows на Linux" name=og:title><meta content='Введение
+В этой публикации описан процесс создания виртуальной машины с Windows в виде гостевой ОС, которая будет обладать важным для инженерного ПО свойством - быстродействием.
+Начальные требования
+Перед началом нужно:
+
+Установить KVM, Libvirt, Qemu и VMM. Процесс установки зависит от дистрибутива;
+Скачать образ диска с VirtIO драйверами для гостевой ОС;
+Скачать образ диска с Windows.
+
+Создание виртуальной машины
+
+Зайти в меню настроек Virtual Machine Manager и включить редактирование XML - это нужно для последующих манипуляций.
+
+
+Настройки VMM
+
+Включено редактирование XML
+
+Нажать на кнопку создания новой виртуальной машины и проделать очевидные шаги настройки до меню с выбором имени, где следует активировать кастомизацию перед установкой и нажать Finish. После этого откроется окно кастомизации.
+
+
+Окно выбора имени VM
+
+В пункте Overview проверить, что стоит чипсет Q35
+
+
+Чипсет Q35
+
+В пункте CPUs проверить, что включен проброс ядер процессора.
+
+
+Проброс ядер процессора
+
+В пункте SATA Disk 1 необходимо изменить шину с SATA на VirtIO, специально оптимизированную для виртуальных машин. Это чрезвычайно важный пункт для быстродействия машины. Так как кеш нам не нужен, его тоже лучше отключить.
+
+
+Настройка хранилища
+
+Монтирование образа диска с VirtIO драйверами. Внизу списка устройств находится кнопка Add Hardware, во всплывающем окне выбираем Storage, в пункте Select or create custom storage выбираем образ диска VirtIO драйверов. Тип устройства выбираем как CDROM.
+
+
+Монтирование диска с драйверами
+
+В пункте NIC (Network Interface Controller) выбираем тип устройства VirtIO.
+
+
+Настройка сети
+
+Устройство Tablet можно удалить.
+
+Таким образом, подготовка к установки гостевой ОС завершена.
+Установка Windows
+Так как мы не хотим привязывать Microsoft аккаунт к гостевой системе, на время установки нужно отключить интернет. Для создания локального аккаунта надо нажать Shift+F10 и ввести в командную строку oobe\bypassnro.
+Так как в нашей конфигурации нет TPM и Secure Boot, проверку его наличия нужно отключить, нажав Shift+F10 на экране связанной с этим ошибки ошибки, введя regedit, создав раздел LabConfig в HKEY_LOCAL_MACHINE\SYSTEM\Setup и добавив параметры BypassTPMCheck, BypassSecureBootCheck типа Dword, которым нужно присвоить значение 1.
+До окна выбора диска, на который будет установлена ОС, установка проходит обычно. Однако, в этом окне не будет ни одного диска - потому что для VirtIO хранилища необходимо подключить драйверы.
+
+Окно выбора драйверов
+Чтобы установить VirtIO disk driver, надо нажать Load driver, затем Browse, CD Drive (E:), Viostor, w11, выбрать amd64 и нажать OK.
+
+Выбор драйвера хранилища
+
+Установка драйвера хранилища
+
+После установки драйверов видно хранилище
+Помимо драйверов хранилища, нужно установить драйверы для сетевого контроллера:
+Нажимаем Load driver, затем Browse, CD Drive (E:), NetKVM, w11, выбрать amd64, и нажать OK.
+
+Установка драйвера сети
+После завершения установки ОС, необходимо установить клиентскую часть VirtIO драйверов:
+
+Установка клиентской части VirtIO драйверов
+Теперь можно сделать разрешение экрана гостевой ОС адаптивным. Для этого в меню VMM нужно нажать на View, выбрать пункт Scale Display и активировать Auto resize VM with window.
+Теперь гостевая система готова к использованию.
+Также для поддержки drag-and-drop и бесшовного прохождения курсора через границу гостевой системы можно установить spice-драйвера, как на хост, так и на гостевую систему.
+Также, из-за отсутствия "железной" видеокарты у гостевой системы, её присутствие эмулируется на процессоре. Об этом нужно оповестить приложения, создав переменную среды QT_OPENGL=desktop. Без неё часть модулей Ansys и SolidWorks не работает.
+Для того чтобы не вводить пароль каждый раз при входе в гостевую ОС, нужно ввести сочетание клавиш Win+R, после чего написать netplwiz. В открывшемся меню надо выбрать свой локальный аккаунт и снять галочку с пункта о необходимости ввода пароля при входе.
+' name=description><meta content='Введение
+В этой публикации описан процесс создания виртуальной машины с Windows в виде гостевой ОС, которая будет обладать важным для инженерного ПО свойством - быстродействием.
+Начальные требования
+Перед началом нужно:
+
+Установить KVM, Libvirt, Qemu и VMM. Процесс установки зависит от дистрибутива;
+Скачать образ диска с VirtIO драйверами для гостевой ОС;
+Скачать образ диска с Windows.
+
+Создание виртуальной машины
+
+Зайти в меню настроек Virtual Machine Manager и включить редактирование XML - это нужно для последующих манипуляций.
+
+
+Настройки VMM
+
+Включено редактирование XML
+
+Нажать на кнопку создания новой виртуальной машины и проделать очевидные шаги настройки до меню с выбором имени, где следует активировать кастомизацию перед установкой и нажать Finish. После этого откроется окно кастомизации.
+
+
+Окно выбора имени VM
+
+В пункте Overview проверить, что стоит чипсет Q35
+
+
+Чипсет Q35
+
+В пункте CPUs проверить, что включен проброс ядер процессора.
+
+
+Проброс ядер процессора
+
+В пункте SATA Disk 1 необходимо изменить шину с SATA на VirtIO, специально оптимизированную для виртуальных машин. Это чрезвычайно важный пункт для быстродействия машины. Так как кеш нам не нужен, его тоже лучше отключить.
+
+
+Настройка хранилища
+
+Монтирование образа диска с VirtIO драйверами. Внизу списка устройств находится кнопка Add Hardware, во всплывающем окне выбираем Storage, в пункте Select or create custom storage выбираем образ диска VirtIO драйверов. Тип устройства выбираем как CDROM.
+
+
+Монтирование диска с драйверами
+
+В пункте NIC (Network Interface Controller) выбираем тип устройства VirtIO.
+
+
+Настройка сети
+
+Устройство Tablet можно удалить.
+
+Таким образом, подготовка к установки гостевой ОС завершена.
+Установка Windows
+Так как мы не хотим привязывать Microsoft аккаунт к гостевой системе, на время установки нужно отключить интернет. Для создания локального аккаунта надо нажать Shift+F10 и ввести в командную строку oobe\bypassnro.
+Так как в нашей конфигурации нет TPM и Secure Boot, проверку его наличия нужно отключить, нажав Shift+F10 на экране связанной с этим ошибки ошибки, введя regedit, создав раздел LabConfig в HKEY_LOCAL_MACHINE\SYSTEM\Setup и добавив параметры BypassTPMCheck, BypassSecureBootCheck типа Dword, которым нужно присвоить значение 1.
+До окна выбора диска, на который будет установлена ОС, установка проходит обычно. Однако, в этом окне не будет ни одного диска - потому что для VirtIO хранилища необходимо подключить драйверы.
+
+Окно выбора драйверов
+Чтобы установить VirtIO disk driver, надо нажать Load driver, затем Browse, CD Drive (E:), Viostor, w11, выбрать amd64 и нажать OK.
+
+Выбор драйвера хранилища
+
+Установка драйвера хранилища
+
+После установки драйверов видно хранилище
+Помимо драйверов хранилища, нужно установить драйверы для сетевого контроллера:
+Нажимаем Load driver, затем Browse, CD Drive (E:), NetKVM, w11, выбрать amd64, и нажать OK.
+
+Установка драйвера сети
+После завершения установки ОС, необходимо установить клиентскую часть VirtIO драйверов:
+
+Установка клиентской части VirtIO драйверов
+Теперь можно сделать разрешение экрана гостевой ОС адаптивным. Для этого в меню VMM нужно нажать на View, выбрать пункт Scale Display и активировать Auto resize VM with window.
+Теперь гостевая система готова к использованию.
+Также для поддержки drag-and-drop и бесшовного прохождения курсора через границу гостевой системы можно установить spice-драйвера, как на хост, так и на гостевую систему.
+Также, из-за отсутствия "железной" видеокарты у гостевой системы, её присутствие эмулируется на процессоре. Об этом нужно оповестить приложения, создав переменную среды QT_OPENGL=desktop. Без неё часть модулей Ansys и SolidWorks не работает.
+Для того чтобы не вводить пароль каждый раз при входе в гостевую ОС, нужно ввести сочетание клавиш Win+R, после чего написать netplwiz. В открывшемся меню надо выбрать свой локальный аккаунт и снять галочку с пункта о необходимости ввода пароля при входе.
+' name=og:description><link rel="shortcut icon" href=/logo/logo-small.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><link crossorigin href=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css integrity=sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+ rel=stylesheet><script crossorigin defer integrity=sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js></script><script crossorigin defer integrity=sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js></script><script>document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });</script><script defer src=/assets/js/copy-button.js></script><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span><a href=/>Main</a></span><span><a href=/blog>Journal</a></span><span><a href=/writings>Search</a></span><span id=themeSelector></span></nav><section class=section-body><div class=container><div class=h-entry><a class="u-url hidden" href=https://artemchandragupta.github.io/blog/vm/>https://artemchandragupta.github.io/blog/vm/</a><div class=section><h1 class="p-name title">Создание быстрой VM для Windows на Linux</h1><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2026-02-03T00:00:00Z> 2026-02-03 </time><code class=dateandtag>2026-02-03</code><code class="u-category dateandtag">Genre: reports</code></div><p><div class=e-content><h1 id=vvedenie>Введение</h1><p>В этой публикации описан процесс создания виртуальной машины с Windows в виде гостевой ОС, которая будет обладать важным для инженерного ПО свойством - быстродействием.<h1 id=nachal-nye-trebovaniia>Начальные требования</h1><p>Перед началом нужно:<ol><li>Установить KVM, Libvirt, Qemu и VMM. Процесс установки зависит от дистрибутива;<li>Скачать образ диска с VirtIO драйверами для гостевой ОС;<li>Скачать образ диска с Windows.</ol><h1 id=sozdanie-virtual-noi-mashiny>Создание виртуальной машины</h1><ol><li>Зайти в меню настроек Virtual Machine Manager и включить редактирование XML - это нужно для последующих манипуляций.</ol><p><img alt=fig1 src=/images/VM/VM-1.png> <em>Настройки VMM</em><p><img alt=fig2 src=/images/VM/VM-2.png> <em>Включено редактирование XML</em><ol start=2><li>Нажать на кнопку создания новой виртуальной машины и проделать очевидные шаги настройки до меню с выбором имени, где следует активировать кастомизацию перед установкой и нажать Finish. После этого откроется окно кастомизации.</ol><p><img alt=fig3 src=/images/VM/VM-3.png> <em>Окно выбора имени VM</em><ol start=3><li>В пункте Overview проверить, что стоит чипсет Q35</ol><p><img alt=fig4 src=/images/VM/VM-4.png> <em>Чипсет Q35</em><ol start=4><li>В пункте CPUs проверить, что включен проброс ядер процессора.</ol><p><img alt=fig5 src=/images/VM/VM-5.png> <em>Проброс ядер процессора</em><ol start=5><li>В пункте SATA Disk 1 необходимо изменить шину с SATA на VirtIO, специально оптимизированную для виртуальных машин. Это чрезвычайно важный пункт для быстродействия машины. Так как кеш нам не нужен, его тоже лучше отключить.</ol><p><img alt=fig6 src=/images/VM/VM-6.png> <em>Настройка хранилища</em><ol start=6><li>Монтирование образа диска с VirtIO драйверами. Внизу списка устройств находится кнопка Add Hardware, во всплывающем окне выбираем Storage, в пункте Select or create custom storage выбираем образ диска VirtIO драйверов. Тип устройства выбираем как CDROM.</ol><p><img alt=fig7 src=/images/VM/VM-7.png> <em>Монтирование диска с драйверами</em><ol start=7><li>В пункте NIC (Network Interface Controller) выбираем тип устройства VirtIO.</ol><p><img alt=fig8 src=/images/VM/VM-8.png> <em>Настройка сети</em><ol start=8><li>Устройство Tablet можно удалить.</ol><p>Таким образом, подготовка к установки гостевой ОС завершена.<h1 id=ustanovka-windows>Установка Windows</h1><p>Так как мы не хотим привязывать Microsoft аккаунт к гостевой системе, на время установки нужно отключить интернет. Для создания локального аккаунта надо нажать Shift+F10 и ввести в командную строку <code>oobe\bypassnro</code>.<p>Так как в нашей конфигурации нет TPM и Secure Boot, проверку его наличия нужно отключить, нажав <em>Shift+F10</em> на экране связанной с этим ошибки ошибки, введя regedit, создав раздел <code>LabConfig</code> в <code>HKEY_LOCAL_MACHINE\SYSTEM\Setup</code> и добавив параметры <em>BypassTPMCheck</em>, <em>BypassSecureBootCheck</em> типа <em>Dword</em>, которым нужно присвоить значение 1.<p>До окна выбора диска, на который будет установлена ОС, установка проходит обычно. Однако, в этом окне не будет ни одного диска - потому что для VirtIO хранилища необходимо подключить драйверы.<p><img alt=fig9 src=/images/VM/WIN-1.webp> <em>Окно выбора драйверов</em><p>Чтобы установить VirtIO disk driver, надо нажать Load driver, затем Browse, CD Drive (E:), Viostor, w11, выбрать amd64 и нажать OK.<p><img alt=fig10 src=/images/VM/WIN-2.webp> <em>Выбор драйвера хранилища</em><p><img alt=fig11 src=/images/VM/WIN-3.webp> <em>Установка драйвера хранилища</em><p><img alt=fig12 src=/images/VM/WIN-4.webp> <em>После установки драйверов видно хранилище</em><p>Помимо драйверов хранилища, нужно установить драйверы для сетевого контроллера:<p>Нажимаем Load driver, затем Browse, CD Drive (E:), NetKVM, w11, выбрать amd64, и нажать OK.<p><img alt=fig13 src=/images/VM/WIN-5.webp> <em>Установка драйвера сети</em><p>После завершения установки ОС, необходимо установить клиентскую часть VirtIO драйверов:<p><img alt=fig14 src=/images/VM/WIN-6.webp> <em>Установка клиентской части VirtIO драйверов</em><p>Теперь можно сделать разрешение экрана гостевой ОС адаптивным. Для этого в меню VMM нужно нажать на View, выбрать пункт Scale Display и активировать Auto resize VM with window.<p>Теперь гостевая система готова к использованию.<p>Также для поддержки drag-and-drop и бесшовного прохождения курсора через границу гостевой системы можно установить spice-драйвера, как на хост, так и на гостевую систему.<p>Также, из-за отсутствия "железной" видеокарты у гостевой системы, её присутствие эмулируется на процессоре. Об этом нужно оповестить приложения, создав переменную среды <code>QT_OPENGL=desktop</code>. Без неё часть модулей Ansys и SolidWorks не работает.<p>Для того чтобы не вводить пароль каждый раз при входе в гостевую ОС, нужно ввести сочетание клавиш <code>Win+R</code>, после чего написать <code>netplwiz</code>. В открывшемся меню надо выбрать свой локальный аккаунт и снять галочку с пункта о необходимости ввода пароля при входе.</div></div></div></div><script defer src=/assets/js/themeSelector.js></script></section><footer><p><a href=https://github.com/ArtemChandragupta/ArtemChandragupta.github.io target=_blank>Source Code</a> │ All articles are usable under <a href=https://creativecommons.org/licenses/by/4.0/ target=_blank>CC BY 4.0</a></footer>

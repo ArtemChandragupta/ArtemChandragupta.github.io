@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>artem::scriptorium - poems</title>
+    <link rel="self" type="application/atom+xml" href="https://artemchandragupta.github.io/writings/poems/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://artemchandragupta.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-01-29T00:00:00+00:00</updated>
+    <id>https://artemchandragupta.github.io/writings/poems/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Вермильон</title>
+        <published>2026-01-29T00:00:00+00:00</published>
+        <updated>2026-01-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              artemchandragupta
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://artemchandragupta.github.io/blog/vermilion/"/>
+        <id>https://artemchandragupta.github.io/blog/vermilion/</id>
+        
+        <content type="html" xml:base="https://artemchandragupta.github.io/blog/vermilion/">&lt;p&gt;Новый вскипает бульон,&lt;br &#x2F;&gt;
+Мнений о нём - миллион,&lt;br &#x2F;&gt;
+От &quot;слишком солёный&quot; и &quot;очень перчёный&quot;&lt;br &#x2F;&gt;
+До &quot;нужен к нему вермильон!&quot;&lt;&#x2F;p&gt;
+&lt;p&gt;Повар от шума трещит,&lt;br &#x2F;&gt;
+Держит он крышку, как щит,&lt;br &#x2F;&gt;
+Машет он ложкой, трясет поварешкой,&lt;br &#x2F;&gt;
+Чтобы спасти общепит!&lt;&#x2F;p&gt;
+&lt;p&gt;Но шведские ставят столы&lt;br &#x2F;&gt;
+Нового мира муллы,&lt;br &#x2F;&gt;
+Там перец, закваска и красная краска,&lt;br &#x2F;&gt;
+Вот новый кашрут Кабалы!&lt;&#x2F;p&gt;
+&lt;p&gt;Ест за столом батальон,&lt;br &#x2F;&gt;
+Блюдо его — вермильон.&lt;br &#x2F;&gt;
+Помолим же Бога, не важно, какого,&lt;br &#x2F;&gt;
+Чтоб стол этот не был снесён!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Мечта Абу Сеида</title>
+        <published>2025-01-15T00:00:00+00:00</published>
+        <updated>2025-01-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              artemchandragupta
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://artemchandragupta.github.io/blog/abu-sa-id-s-dream/"/>
+        <id>https://artemchandragupta.github.io/blog/abu-sa-id-s-dream/</id>
+        
+        <content type="html" xml:base="https://artemchandragupta.github.io/blog/abu-sa-id-s-dream/">&lt;p&gt;Печален дух Абу Сеида,&lt;br &#x2F;&gt;
+Ведь не сбылись его мечты:&lt;br &#x2F;&gt;
+Сгубили царство тимурида&lt;br &#x2F;&gt;
+Эмиры, ханы... Но хребты&lt;&#x2F;p&gt;
+&lt;p&gt;Седых вершин Кабулистана&lt;br &#x2F;&gt;
+Спасут от схизмы и вражды&lt;br &#x2F;&gt;
+Потомков племени Гуркана,&lt;br &#x2F;&gt;
+Ведь им самим теперь чужды&lt;&#x2F;p&gt;
+&lt;p&gt;Сухие розы Хорасана,&lt;br &#x2F;&gt;
+Ведь дар божественной руки —&lt;br &#x2F;&gt;
+Ключи от сердца Индостана —&lt;br &#x2F;&gt;
+Позволят саду расцвести&lt;&#x2F;p&gt;
+&lt;p&gt;Достойно славы чингизида&lt;br &#x2F;&gt;
+В им покорённых городах!&lt;br &#x2F;&gt;
+Но тень мечты Абу Сеида&lt;br &#x2F;&gt;
+Не скрыть ни в битвах, ни в садах.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
